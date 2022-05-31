@@ -1,31 +1,6 @@
 const { createTag } = require('./createTag.js');
+const { Animation } = require('./animation.js');
 const fs = require('fs');
-
-class Animation {
-  constructor(action) {
-    this.action = action;
-    this.frameIndex = 0;
-  }
-
-  reset() {
-    this.frameIndex = 0;
-  }
-
-  currentFrame() {
-    return this.action[this.frameIndex];
-  }
-
-  nextFrame() {
-    this.frameIndex++
-    this.frameIndex === this.action.length ? this.reset() : this.frameIndex;
-  }
-
-  draw() {
-    return createImgTag(this.currentFrame());
-  }
-}
-
-const createImgTag = (image) => createTag(['img', { src: image }]);
 
 const createHtml = (image) => {
   const meta = '<meta http-equiv="refresh" content="0.2" />';

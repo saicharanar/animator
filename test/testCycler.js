@@ -8,17 +8,15 @@ describe('Cycler', () => {
     assert.ok(c1.equals(c2));
   });
 
+  const list = new Cycler(['a', 'b']);
   describe('Cycler current element', () => {
     it('Should give current item of the list', () => {
-      const list = new Cycler(['a', 'b']);
       assert.equal(list.current(), 'a');
     });
   });
 
   describe('Cycler next element', () => {
     it('Should give next item of the list', () => {
-      const list = new Cycler(['a', 'b']);
-      list.next();
       assert.equal(list.current(), 'b');
     });
   });

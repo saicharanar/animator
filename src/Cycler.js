@@ -1,12 +1,4 @@
-const assert = require("assert");
-const asserter = (list1, list2) => {
-  try {
-    assert.deepStrictEqual(list1, list2);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+const { asserter } = require("./asserter");
 
 class Cycler {
   constructor(list) {
@@ -15,7 +7,9 @@ class Cycler {
   }
 
   current() {
-    return this.list[this.index];
+    const currentItem = this.list[this.index];
+    this.next();
+    return currentItem;
   }
 
   next() {
