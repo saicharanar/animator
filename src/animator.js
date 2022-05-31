@@ -1,14 +1,17 @@
 const { createTag } = require("./createTag");
 const fs = require('fs');
 
-class Character {
+class Animation {
   constructor(action) {
     this.action = action;
     this.frameIndex = 0;
   }
 
   draw() {
-    return createImgTag(this.currentFrame().toHTML());
+    const frame = this.action[this.frameIndex];
+    this.frameIndex++;
+
+    return
   }
 }
 
