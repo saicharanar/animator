@@ -14,18 +14,18 @@ class Image {
 };
 
 class Character {
-  constructor(animation) {
-    this.animation = animation;
+  constructor(action) {
+    this.action = action;
     this.frameIndex = 0;
   }
 
   currentFrame() {
-    return this.animation[this.frameIndex];
+    return this.action[this.frameIndex];
   }
 
   nextFrame() {
     this.frameIndex++;
-    this.frameIndex = this.frameIndex === this.animation.length ? 0 : this.frameIndex;
+    this.frameIndex = this.frameIndex === this.action.length ? 0 : this.frameIndex;
   }
 
   draw() {
