@@ -1,23 +1,6 @@
 const { createTag } = require("./createTag");
 const fs = require('fs');
 
-class Iterator {
-  constructor(list) {
-    this.list = list;
-    this.index = 0;
-  }
-
-  currentArg() {
-    return this.list[this.index];
-  }
-
-  nexArg() {
-    this.index++;
-    this.index = this.index === this.list.length ? 0 : this.index;
-    return this.currentArg();
-  }
-}
-
 class Image {
   constructor(src) {
     this.src = src;
@@ -25,16 +8,29 @@ class Image {
 
   toHTML() {
     return createTag([
-      'img',
-      {
-        src: this.src,
-      }
+      'img', { src: this.src, }
     ]);
   }
-}
+};
 
-const createHtmlImage = (image) => {
-  return new Image(image).toHTML();
+class Character {
+  constructor(animation) {
+    this.animation = animation;
+    this.frameIndex = 0;
+  }
+
+  currentFrame() {
+    return this.animation[this.frameIndex];
+  }
+
+  nextFrame() {
+    this.frameIndex++;
+    this.frameIndex = this.frameIndex === this.animation.length ? 0 : this.frameIndex;
+  }
+
+  draw() {
+    return new Image(this.currentFrame()).toHTML();
+  }
 }
 
 const createHtml = (image) => {
@@ -44,24 +40,23 @@ const createHtml = (image) => {
   return createTag(['html', {}, head + body]);
 };
 
-const animate = (imagesItr, interval) => {
-  setTimeout(() => {
-    const image = createHtmlImage(imagesItr.currentArg());
-    const html = createHtml(image);
-    fs.writeFileSync('./index.html', html, 'utf8');
-    imagesItr.nexArg();
-    animate(imagesItr, interval);
+const animate = (characterModel, interval) => {
+  setInterval(() => {
+    const currentFrame = createHtml(characterModel.draw());
+    fs.writeFileSync('./index.html', currentFrame, 'utf8');
+    characterModel.nextFrame();
   }, interval);
+
 };
 
-const animator = (images) => {
+const animator = (character) => {
   const interval = 100;
-  const imagesItr = new Iterator(images);
-  animate(imagesItr, interval);
+  const characterModel = new Character(character);
+  animate(characterModel, interval);
 };
 
-const main = (files) => {
-  console.log(animator(files));
+const main = (character) => {
+  animator(character);
 };
 
 main(process.argv.slice(2));
