@@ -1,7 +1,7 @@
 const { createTag } = require('./createTag.js');
 const fs = require('fs');
 
-class Character {
+class Animation {
   constructor(action) {
     this.action = action;
     this.frameIndex = 0;
@@ -45,7 +45,7 @@ const animate = (characterModel, interval) => {
 
 const animator = (character) => {
   const interval = 200;
-  const characterModel = new Character(character);
+  const characterModel = new Animation(character);
   animate(characterModel, interval);
 };
 
