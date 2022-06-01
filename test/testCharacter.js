@@ -2,7 +2,7 @@ const assert = require('assert');
 const { Animation } = require('../src/animation');
 const { Character, createCharacter } = require('../src/character');
 
-describe.only('Character', () => {
+describe('Character', () => {
   it('Should validate the object is a character', () => {
     const c1 = new Character(['idle1', 'idle2'], ['run1', 'run2']);
     const c2 = new Character(['idle1', 'idle2'], ['run1', 'run2']);
@@ -35,7 +35,7 @@ describe.only('Character', () => {
 
 describe('createCharacter', () => {
   it('Should give an instance of character', () => {
-    const character = createCharacter([1, 2]);
+    const character = createCharacter([1, 2], [3, 4]);
     assert.ok(character instanceof Character);
   });
 });

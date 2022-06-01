@@ -25,9 +25,10 @@ class Character {
   }
 }
 
-const createCharacter = (idle) => {
+const createCharacter = (idle, run) => {
   const idler = new Animation(idle);
-  const character = new Character(idler);
+  const running = new Animation(run);
+  const character = new Character(idler, running);
   return character;
 };
 
