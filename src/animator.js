@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { actions } = require('../data/actions.json');
 const { createTag } = require('./createTag.js');
 const { createCharacter } = require('./character.js');
 
@@ -28,11 +29,9 @@ const animator = (idle, run) => {
   }, 10000);
 };
 
-const main = (actions) => {
-  // const { idle, run } = separateActions(actions);
-  const idle = actions.slice(0, 10);
-  const run = actions.slice(10, 20);
+const main = () => {
+  const { idle, run } = actions;
   animator(idle, run);
 };
 
-main(process.argv.slice(2));
+main();

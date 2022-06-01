@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "idle": [
+      "data/images/Idle (1).png",
+      "data/images/Idle (2).png",
+      "data/images/Idle (3).png",
+      "data/images/Idle (4).png",
+      "data/images/Idle (5).png",
+      "data/images/Idle (6).png",
+      "data/images/Idle (7).png",
+      "data/images/Idle (8).png",
+      "data/images/Idle (9).png",
+      "data/images/Idle (10).png"
+    ],
+
+    "run": [
+      "data/images/Run (1).png",
+      "data/images/Run (2).png",
+      "data/images/Run (3).png",
+      "data/images/Run (4).png",
+      "data/images/Run (5).png",
+      "data/images/Run (6).png",
+      "data/images/Run (7).png",
+      "data/images/Run (8).png",
+      "data/images/Run (9).png",
+      "data/images/Run (10).png"
+    ]
+  }
+}
