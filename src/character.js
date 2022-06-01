@@ -5,6 +5,11 @@ class Character {
   constructor(idle, run) {
     this.idle = idle;
     this.run = run;
+    this.currentAction = idle;
+  }
+
+  draw() {
+    return this.currentAction.draw();
   }
 
   equals(otherCharacter) {
