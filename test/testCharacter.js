@@ -13,15 +13,22 @@ describe.only('Character', () => {
   const run = new Animation(['run1', 'run2']);
   const character = new Character(idle, run);
 
-  it('Should give the draw frame of current action ', () => {
+  it('Should draw frame of current action ', () => {
     const actual = character.draw();
     const expected = '<img src="idle1"></img>';
     assert.equal(actual, expected);
   });
 
-  it('Should give the draw next frame of current action ', () => {
+  it('Should draw next frame of current action ', () => {
     const actual = character.draw();
     const expected = '<img src="idle2"></img>';
+    assert.equal(actual, expected);
+  });
+
+  it('Should set the action to run ', () => {
+    character.setRun();
+    const actual = character.draw();
+    const expected = '<img src="run1"></img>';
     assert.equal(actual, expected);
   });
 });

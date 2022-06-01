@@ -12,6 +12,10 @@ class Character {
     return this.currentAction.draw();
   }
 
+  setRun() {
+    this.currentAction = this.run;
+  }
+
   equals(otherCharacter) {
     return (
       otherCharacter instanceof Character &&
