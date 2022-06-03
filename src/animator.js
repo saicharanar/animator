@@ -5,7 +5,7 @@ const { createCharacter } = require('./character.js');
 const { EventNotifier } = require('./events.js');
 
 const createHtml = (image) => {
-  const meta = '<meta http-equiv="refresh" content="0.1" />';
+  const meta = '<meta http-equiv="refresh" content="0.15" />';
   const head = createTag(['head', {}, meta]);
   const body = createTag(['body', {}, image]);
   return createTag(['html', {}, head + body]);
@@ -19,12 +19,8 @@ const animate = (character, interval) => {
 };
 
 const animator = (character) => {
-  const interval = 100;
-  const intervalTimer = animate(character, interval);
-
-  setTimeout(() => {
-    clearInterval(intervalTimer);
-  }, 10000);
+  const interval = 150;
+  animate(character, interval);
 };
 
 const getLatestAction = (file) => {
@@ -44,13 +40,16 @@ const takeUserInput = (actionsNotifier, character) => {
 };
 
 const main = () => {
-  const { idle, run } = actions;
-  const character = createCharacter(idle, run);
+  const { idle, run, attack, walk } = actions;
+  const character = createCharacter(idle, run, attack, walk);
   const actionsNotifier = new EventNotifier();
   actionsNotifier.register('start', (character) => character.setIdle());
   actionsNotifier.register('run', (character) => character.setRun());
+  actionsNotifier.register('attack', (character) => character.setAttack());
+  actionsNotifier.register('walk', (character) => character.setWalk());
   actionsNotifier.register('stop', (character) => character.setIdle());
 
+  animator(character);
   takeUserInput(actionsNotifier, character);
 };
 

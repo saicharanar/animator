@@ -2,9 +2,11 @@ const { Animation } = require('./animation');
 const { asserter } = require('./asserter');
 
 class Character {
-  constructor(idle, run) {
+  constructor(idle, run, attack, walk) {
     this.idle = idle;
     this.run = run;
+    this.attack = attack;
+    this.walk = walk;
     this.currentAction = idle;
   }
 
@@ -20,6 +22,14 @@ class Character {
     this.currentAction = this.idle;
   }
 
+  setAttack() {
+    this.currentAction = this.attack;
+  }
+
+  setWalk() {
+    this.currentAction = this.walk;
+  }
+
   equals(otherCharacter) {
     return (
       otherCharacter instanceof Character &&
@@ -29,10 +39,12 @@ class Character {
   }
 }
 
-const createCharacter = (idle, run) => {
+const createCharacter = (idle, run, attack, walk) => {
   const idler = new Animation(idle);
   const running = new Animation(run);
-  const character = new Character(idler, running);
+  const attacking = new Animation(attack);
+  const walking = new Animation(walk);
+  const character = new Character(idler, running, attacking, walking);
   return character;
 };
 

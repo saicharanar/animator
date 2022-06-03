@@ -24,6 +24,30 @@
       "data/images/Run (8).png",
       "data/images/Run (9).png",
       "data/images/Run (10).png"
+    ],
+    "attack": [
+      "data/images/Attack (1).png",
+      "data/images/Attack (2).png",
+      "data/images/Attack (3).png",
+      "data/images/Attack (4).png",
+      "data/images/Attack (5).png",
+      "data/images/Attack (6).png",
+      "data/images/Attack (7).png",
+      "data/images/Attack (8).png",
+      "data/images/Attack (9).png",
+      "data/images/Attack (10).png"
+    ],
+    "walk": [
+      "data/images/Walk (1).png",
+      "data/images/Walk (2).png",
+      "data/images/Walk (3).png",
+      "data/images/Walk (4).png",
+      "data/images/Walk (5).png",
+      "data/images/Walk (6).png",
+      "data/images/Walk (7).png",
+      "data/images/Walk (8).png",
+      "data/images/Walk (9).png",
+      "data/images/Walk (10).png"
     ]
   }
 }
