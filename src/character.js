@@ -16,6 +16,10 @@ class Character {
     this.currentAction = this.run;
   }
 
+  setIdle() {
+    this.currentAction = this.idle;
+  }
+
   equals(otherCharacter) {
     return (
       otherCharacter instanceof Character &&
