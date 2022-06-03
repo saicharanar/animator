@@ -2,7 +2,7 @@ const fs = require('fs');
 const { actions } = require('../data/actions.json');
 const { createTag } = require('./createTag.js');
 const { createCharacter } = require('./character.js');
-const { EventNotifier } = require('./events.js');
+const { EventEmitter } = require('events');
 
 const createHtml = (image) => {
   const meta = '<meta http-equiv="refresh" content="0.15" />';
@@ -27,14 +27,14 @@ const getLatestAction = (file) => {
   const fileContent = fs.readFileSync(file, 'utf-8');
   const action = fileContent.trim().split('\n').slice(-1);
 
-  return action;
+  return action.toString();
 };
 
 const takeUserInput = (actionsNotifier, character) => {
   const file = './controller';
   fs.watchFile(file, (prev, curr) => {
     const action = getLatestAction(file);
-    actionsNotifier.notify(...action, character);
+    actionsNotifier.emit(action, character);
     animator(character);
   });
 };
@@ -42,12 +42,12 @@ const takeUserInput = (actionsNotifier, character) => {
 const main = () => {
   const { idle, run, attack, walk } = actions;
   const character = createCharacter(idle, run, attack, walk);
-  const actionsNotifier = new EventNotifier();
-  actionsNotifier.register('start', (character) => character.setIdle());
-  actionsNotifier.register('run', (character) => character.setRun());
-  actionsNotifier.register('attack', (character) => character.setAttack());
-  actionsNotifier.register('walk', (character) => character.setWalk());
-  actionsNotifier.register('stop', (character) => character.setIdle());
+  const actionsNotifier = new EventEmitter();
+  actionsNotifier.on('start', (character) => character.setIdle());
+  actionsNotifier.on('run', (character) => character.setRun());
+  actionsNotifier.on('attack', (character) => character.setAttack());
+  actionsNotifier.on('walk', (character) => character.setWalk());
+  actionsNotifier.on('stop', (character) => character.setIdle());
 
   animator(character);
   takeUserInput(actionsNotifier, character);
