@@ -27,11 +27,17 @@ const animator = (character) => {
   }, 10000);
 };
 
-const takeUserInput = (actionsNotifier, idle, run) => {
-  const character = createCharacter(idle, run);
-  fs.watchFile('./controller', (prev, curr) => {
-    const fileContent = fs.readFileSync('./controller', 'utf-8');
-    const action = fileContent.split('\n').slice(-1);
+const getLatestAction = (file) => {
+  const fileContent = fs.readFileSync(file, 'utf-8');
+  const action = fileContent.trim().split('\n').slice(-1);
+
+  return action;
+};
+
+const takeUserInput = (actionsNotifier, character) => {
+  const file = './controller';
+  fs.watchFile(file, (prev, curr) => {
+    const action = getLatestAction(file);
     actionsNotifier.notify(...action, character);
     animator(character);
   });
@@ -39,12 +45,13 @@ const takeUserInput = (actionsNotifier, idle, run) => {
 
 const main = () => {
   const { idle, run } = actions;
+  const character = createCharacter(idle, run);
   const actionsNotifier = new EventNotifier();
   actionsNotifier.register('start', (character) => character.setIdle());
   actionsNotifier.register('run', (character) => character.setRun());
   actionsNotifier.register('stop', (character) => character.setIdle());
 
-  takeUserInput(actionsNotifier, idle, run);
+  takeUserInput(actionsNotifier, character);
 };
 
 main();
